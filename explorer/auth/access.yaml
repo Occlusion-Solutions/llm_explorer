@@ -1,0 +1,23 @@
+credentials:
+  usernames:
+    demo:
+      email: demo@occlusion.soutions
+      name: Demo
+      password: $2b$12$fGOxDtrZX3rcjXq.Sp3IDeOwL0ddEkN3B/mBaIw1KmVcENPyMG1qu # DEMO@occlusion
+    broomva:
+      email: carlosdavidescobar@gmail.com
+      name: Carlos Escobar
+      password: $2b$12$W4GAOaKAVzU8A0YREgAWWOhiAa68h/CHqQO5wGsmpV88jJ6c1AKe2 # To be replaced with hashed password
+cookie:
+  expiry_days: 30
+  key: random_signature_key # Must be string
+  name: llm_explorer_cookies
+preauthorized:
+  emails:
+   - demo@occlusion.soutions
+   - carlosdavidescobar@gmail.com
+  users:
+    - demo
+    - broomva
+  
+ 

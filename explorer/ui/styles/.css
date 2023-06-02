@@ -1,0 +1,52 @@
+a {
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.block-container {
+    padding: 0 16px 96px 16px;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #d33682 !important;
+}
+
+ul {
+    list-style-type: none;
+}
+
+hr {
+    margin-top: 0;
+    margin-bottom: 5%;
+}
+
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header {
+    visibility: hidden;
+}
+
+audio::-webkit-media-controls-panel,
+audio::-webkit-media-controls-enclosure {
+    background-color: #2E4F4F;
+    max-height: 30px;
+    border-radius: 4px;
+}
+
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-current-time-display {
+    color: #CBE4DE;
+    text-shadow: none;
+}
+
+audio::-webkit-media-controls-timeline {
+    border-radius: 8px;
+    margin: 10px;
+}
