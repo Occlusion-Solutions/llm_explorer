@@ -22,7 +22,7 @@ last_altered_by: string
 global_metastore_id: string
 
 
-**Table 2: default.snow_vw_en_padalloc_daily_summary_out (This table stores the daily summary of padalloc)
+**Table 2: default.padalloc (This table stores the daily summary of padalloc)
 This table stores the information of the padalloc view, which includes the production values for all the wells for a given day.
 
 ZONE_CODE string

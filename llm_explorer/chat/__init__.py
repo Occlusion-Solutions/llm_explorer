@@ -7,9 +7,12 @@ from llm_explorer.agents import ExplorerAgent, HFTAgent
 from llm_explorer.chains import extract_code, is_sql_query
 from llm_explorer.databases.adbddl import ADBDDL
 from llm_explorer.indexes.vectorstore import VectorStoreHandler
+from llm_explorer.llm import set_llm
 from llm_explorer.templates.chains import chains_templates
 from llm_explorer.templates.ui import session_state_templates
 from llm_explorer.ui import UI
+
+set_llm()
 
 adb_ddl = ADBDDL()
 agent_database = (

@@ -6,8 +6,11 @@ import streamlit as st
 from langchain.chains import ConversationalRetrievalChain, LLMChain, RetrievalQA
 from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.llms import OpenAI
 from langchain.prompts.prompt import PromptTemplate
+
+from llm_explorer.llm import set_llm
+
+set_llm()
 
 from llm_explorer.templates.chains import chains_templates
 
@@ -33,28 +36,10 @@ def set_chain(llm, **kwargs):
     return question_generator, doc_chain
 
 
-class TSEConversationChain:
+class ExplorerConversationChain:
     def __init__(self, **kwargs):
         self.kwargs = kwargs
-        self.llm = OpenAI(
-            temperature=kwargs.get("temperature", 0),
-            openai_api_key=st.secrets.connections.openai.api_key,
-            model_name="gpt-3.5-turbo",
-            max_tokens=kwargs.get("max_tokens", -1),  # Max number of tokens to generate
-            # top_p=kwargs.get(
-            #     "top_p", 1
-            # ),  # Total probability mass of tokens to consider at each step
-            # frequency_penalty=kwargs.get(
-            #     "frequency_penalty", 0
-            # ),  # Penalizes repeated tokens according to frequency
-            # presence_penalty=kwargs.get(
-            #     "presence_penalty", 0
-            # ),  # Penalizes repeated tokens.
-            # n=kwargs.get("n", 1),  # How many completions to generate for each prompt.
-            # best_of=kwargs.get(
-            #     "best_of", 1
-            # ),  # Generates best_of completions server-side and returns the "best".
-        )
+        self.llm = st.session_state.llm
         self.embeddings = OpenAIEmbeddings(
             openai_api_key=st.secrets.connections.openai.api_key
         )
