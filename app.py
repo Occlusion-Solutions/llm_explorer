@@ -10,5 +10,9 @@ filename = os.path.join(dirname, "main.py")
 _config.set_option("server.headless", True)
 args = []
 
-if __name__ == "__main__":
+def main():
     streamlit.web.bootstrap.run(filename, "", args, flag_options={})
+
+if __name__ == "__main__":
+    main()
+    

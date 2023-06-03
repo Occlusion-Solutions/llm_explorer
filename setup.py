@@ -27,7 +27,7 @@ package_name = "llm_explorer"
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
 if "PKGVARSETUP" in package_env:
-    version = "0.0.5"
+    version = "0.0.6"
 
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
@@ -72,7 +72,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "llm_explorer=llm_explorer:main",
+            "llm_explorer=app:main",
         ],
     },
 )
