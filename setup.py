@@ -27,7 +27,7 @@ package_name = "llm_explorer"
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
 if "PKGVARSETUP" in package_env:
-    version = "0.0.3"
+    version = "0.0.4"
 
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 

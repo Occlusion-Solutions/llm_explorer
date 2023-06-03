@@ -3,7 +3,7 @@ from langchain.llms import OpenAI
 
 
 def set_llm(**kwargs):
-    st.session_state.llm = OpenAI(
+    llm = OpenAI(
         temperature=kwargs.get("temperature", 0),
         openai_api_key=st.secrets.connections.openai.api_key,
         model_name="gpt-3.5-turbo",
@@ -22,3 +22,6 @@ def set_llm(**kwargs):
         #     "best_of", 1
         # ),  # Generates best_of completions server-side and returns the "best".
     )
+    if "llm" not in st.session_state:
+        st.session_state["llm"] = llm
+    return llm

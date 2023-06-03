@@ -8,8 +8,25 @@
 
 ### Pypi
 ```shell
-pip install llm-explorer
+python -m pip install llm-explorer
 ```
+
+```shell
+touch main.py
+```
+
+```python
+from llm_explorer import main
+
+if __name__ == "__main__":
+    main()
+```
+
+```shell
+python -m streamlit run main.py
+```
+
+Initial load could take some time as it downloads the model and the tokenizer. Remember to include the secrets.toml file under .streamlit/ folder.
 
 
 ### Build from source

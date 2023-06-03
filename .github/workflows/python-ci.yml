@@ -9,9 +9,6 @@ on:
   pull_request:
     branches: [ "main" ]
 
-permissions:
-  contents: read
-
 jobs:
   build:
 
@@ -29,11 +26,33 @@ jobs:
         pip install pytest
         pip install black pylint
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Modify Files using Current Branch Name
+      run: |
+        if [[ ${{ github.ref }} == 'refs/heads/main' ]]; then
+          # Find and update Python files with Jinja pattern
+          find . -type f -name "*.py" -exec sh -c '
+            for file do
+              # Replace {{ git_branch }} with the current branch name
+              sed -i "s/{{ git_branch }}/$GITHUB_REF_NAME/g" "$file"
+            done
+          ' sh {} +
+
+          # Commit the changes
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Update file content"
+
+          # Push the changes back to the branch
+          git push
+        fi
     - name: Auto Lint with black, pylint
       run: |
         black .
         black --diff --check $(git ls-files '*.py')
         pylint --disable=all --enable=unused-import $(git ls-files '*.py')
-    # - name: Test with pytest
-    #  run: |
-    #    pytest
+    - name: relase-please-action
+      uses: google-github-actions/release-please-action@v3
+      with:
+        release-type: python
+        package-name: release-please-action

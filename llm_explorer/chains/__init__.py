@@ -3,7 +3,8 @@ import re
 import openai
 import pandas as pd
 import streamlit as st
-from langchain.chains import ConversationalRetrievalChain, LLMChain, RetrievalQA
+from langchain.chains import (ConversationalRetrievalChain, LLMChain,
+                              RetrievalQA)
 from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.prompts.prompt import PromptTemplate
@@ -39,7 +40,7 @@ def set_chain(llm, **kwargs):
 class ExplorerConversationChain:
     def __init__(self, **kwargs):
         self.kwargs = kwargs
-        self.llm = st.session_state.llm
+        self.llm = set_llm()
         self.embeddings = OpenAIEmbeddings(
             openai_api_key=st.secrets.connections.openai.api_key
         )
