@@ -50,9 +50,9 @@ setup(
     long_description_content_type="text/markdown",
     packages=find_packages(where="."),
     include_package_data=True,
-    setup_requires=['setuptools', 'wheel'],
-    tests_require=['pytest'],
-    python_requires='>=3.10',
+    setup_requires=["setuptools", "wheel"],
+    tests_require=["pytest"],
+    python_requires=">=3.10",
     nstall_requires=required,
     test_suite="tests",
     zip_safe=False,
@@ -71,8 +71,8 @@ setup(
         "": ["*.json"],
     },
     entry_points={
-        'console_scripts': [
-            'llm_explorer=llm_explorer:main',
+        "console_scripts": [
+            "llm_explorer=llm_explorer:main",
         ],
     },
 )
