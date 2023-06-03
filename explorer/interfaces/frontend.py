@@ -1,6 +1,4 @@
 # import pyautogui
-from typing import Union
-
 import streamlit as st
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 

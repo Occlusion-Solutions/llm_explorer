@@ -10,6 +10,8 @@ if sys.version_info < (3, 6):
 
 try:
     from setuptools import find_namespace_packages
+
+    find_namespace_packages()
 except ImportError:
     # the user has a downlevel version of setuptools.
     print("Error: llm_explorer requires setuptools v40.1.0 or higher.")

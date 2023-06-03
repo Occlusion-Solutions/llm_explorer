@@ -1,11 +1,8 @@
-import pickle
-
 import pandas as pd
 import streamlit as st
 from langchain.document_loaders import DataFrameLoader, UnstructuredMarkdownLoader
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.memory.vectorstore import VectorStoreRetrieverMemory
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS, Chroma
 
