@@ -24,7 +24,7 @@ from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
 
-from .chains import TSEConversationChain
+from .chains import ExplorerConversationChain
 from .chat import chat_loop
 from .interfaces import frontend as it
 from .ui.lang import en, es
@@ -73,7 +73,7 @@ def auth():
 
 
 load_dotenv(find_dotenv())
-tse_chain = TSEConversationChain()
+chain = ExplorerConversationChain()
 
 # --- PATH SETTINGS ---
 current_dir: Path = Path(__file__).parent if "__file__" in locals() else Path.cwd()
@@ -123,7 +123,7 @@ def main() -> None:
     it.display_header()
     it.display_sidebar()
     if auth():
-        chat_loop(tse_chain)
+        chat_loop(chain)
     else:
         st.write("You are not authorized to access this page.")
 
