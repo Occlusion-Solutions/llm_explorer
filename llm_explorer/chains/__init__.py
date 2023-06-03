@@ -3,8 +3,7 @@ import re
 import openai
 import pandas as pd
 import streamlit as st
-from langchain.chains import (ConversationalRetrievalChain, LLMChain,
-                              RetrievalQA)
+from langchain.chains import ConversationalRetrievalChain, LLMChain, RetrievalQA
 from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.prompts.prompt import PromptTemplate

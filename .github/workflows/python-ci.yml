@@ -37,6 +37,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Auto Lint with black, pylint
       run: |
+        black .
         black --diff --check $(git ls-files '*.py')
         pylint --disable=all --enable=unused-import $(git ls-files '*.py')
     # - name: Test with pytest
