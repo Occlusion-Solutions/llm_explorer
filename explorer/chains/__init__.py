@@ -1,25 +1,10 @@
-# class TSEAgentExecutor(AgentExecutor):
-#     def __init__(self, agent: AgentType, llm: LLMChain, tools: list[Tool], verbose: bool = False):
-#         super().__init__(agent, llm, tools, verbose)
-#         self.agent = agent
-#         self.llm = llm
-#         self.tools = tools
-#         self.verbose = verbose
-
-#     def run(self, prompt: str) -> str:
-#         # Initialize the agent
-#         self.agent = initialize_agent(self.agent, self.llm, self.tools, self.verbose)
-#         # Create the conversation chain
-#         chain = ConversationChain(self.agent, self.llm, self.tools, self.verbose)
-#         # Run the chain
-#         return chain.run(prompt)
-
 import re
 
 import openai
 import pandas as pd
 import streamlit as st
-from langchain.chains import ConversationalRetrievalChain, LLMChain, RetrievalQA
+from langchain.chains import (ConversationalRetrievalChain, LLMChain,
+                              RetrievalQA)
 from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
