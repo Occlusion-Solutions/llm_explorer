@@ -56,23 +56,23 @@ jobs:
             done
           ' sh {} +
         fi
+    - name: Handle Versioning
+      uses: google-github-actions/release-please-action@v3
+      with:
+        release-type: python
+        package-name: release-please-action
     - name: Auto Lint with black, pylint
       run: |
         black .
         black --diff --check $(git ls-files '*.py')
         pylint --disable=all --enable=unused-import $(git ls-files '*.py')
-    - name: relase-please-action
-      uses: google-github-actions/release-please-action@v3
-      with:
-        release-type: python
-        package-name: release-please-action
-    - name: Push versioning
+    - name: Push Linting and Versioning Changes
       run: |
         # Commit the changes
         git config --local user.email "actions@github.com"
         git config --local user.name "GitHub Actions"
         git add .
-        git commit -m "chore(versioning): update versioning"
+        git commit -m "chore(versioning): versioning and linting changes"
 
         # Push the changes back to the branch
         git push
