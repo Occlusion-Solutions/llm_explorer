@@ -3,13 +3,14 @@ import re
 import openai
 import pandas as pd
 import streamlit as st
-from langchain.chains import ConversationalRetrievalChain, LLMChain, RetrievalQA
+from langchain.chains import (ConversationalRetrievalChain, LLMChain,
+                              RetrievalQA)
 from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
 from langchain.prompts.prompt import PromptTemplate
 
-from explorer.templates.chains import chains_templates
+from llm_explorer.templates.chains import chains_templates
 
 
 def set_chain(llm, **kwargs):

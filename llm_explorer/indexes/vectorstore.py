@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
-from langchain.document_loaders import DataFrameLoader, UnstructuredMarkdownLoader
+from langchain.document_loaders import (DataFrameLoader,
+                                        UnstructuredMarkdownLoader)
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -41,7 +42,7 @@ def load_faiss_vectorstore():
 
 
 def faiss_metadata_index_loader(
-    metadata_path: str = "explorer/indexes/metadata/schema.md",
+    metadata_path: str = "llm_explorer/indexes/metadata/schema.md",
     page_content_column: str = "y",
 ):
     loader = UnstructuredMarkdownLoader(metadata_path)
@@ -55,14 +56,14 @@ def faiss_metadata_index_loader(
 
     faiss_store = FAISS.from_documents(texts, embeddings)
     # docsearch.add_documents(docs)
-    faiss_store.save_local("explorer/indexes/faiss_index")
+    faiss_store.save_local("llm_explorer/indexes/faiss_index")
 
     # with open("vectors.pkl", "wb") as f:
     #     pickle.dump(docsearch, f)
 
 
 def pandas_df_vectorstore_loader(
-    data_path: str = "explorer/indexes/samples/telemetry_sample_forecast.csv",
+    data_path: str = "llm_explorer/indexes/samples/telemetry_sample_forecast.csv",
     page_content_column: str = "y",
 ):
     df = pd.read_csv(data_path)

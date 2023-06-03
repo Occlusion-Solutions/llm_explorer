@@ -3,13 +3,13 @@ import contextlib
 import streamlit as st
 from langchain.memory import ConversationBufferMemory
 
-from explorer.agents import ExplorerAgent, HFTAgent
-from explorer.chains import extract_code, is_sql_query
-from explorer.databases.adbddl import ADBDDL
-from explorer.indexes.vectorstore import VectorStoreHandler
-from explorer.templates.chains import chains_templates
-from explorer.templates.ui import session_state_templates
-from explorer.ui import UI
+from llm_explorer.agents import ExplorerAgent, HFTAgent
+from llm_explorer.chains import extract_code, is_sql_query
+from llm_explorer.databases.adbddl import ADBDDL
+from llm_explorer.indexes.vectorstore import VectorStoreHandler
+from llm_explorer.templates.chains import chains_templates
+from llm_explorer.templates.ui import session_state_templates
+from llm_explorer.ui import UI
 
 adb_ddl = ADBDDL()
 agent_database = (

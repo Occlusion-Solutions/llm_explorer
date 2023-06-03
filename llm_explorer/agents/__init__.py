@@ -4,20 +4,14 @@ import pandas as pd
 import streamlit as st
 from dotenv import find_dotenv, load_dotenv
 from langchain import ConversationChain, LLMChain, OpenAI
-from langchain.agents import (
-    AgentExecutor,
-    AgentType,
-    Tool,
-    ZeroShotAgent,
-    create_pandas_dataframe_agent,
-    initialize_agent,
-    load_tools,
-)
+from langchain.agents import (AgentExecutor, AgentType, Tool, ZeroShotAgent,
+                              create_pandas_dataframe_agent, initialize_agent,
+                              load_tools)
 from langchain.agents.load_tools import get_all_tool_names
 
-import explorer.interfaces.frontend as it
-from explorer.templates.agents import agents_templates
-from explorer.templates.prompt import prompt_templates
+import llm_explorer.interfaces.frontend as it
+from llm_explorer.templates.agents import agents_templates
+from llm_explorer.templates.prompt import prompt_templates
 
 load_dotenv(find_dotenv())
 
@@ -76,7 +70,7 @@ class TSELLMAgent:
 
 def pandas_agent():
     uploaded_file = it.display_widgets(
-        "explorer/indexes/samples/telemetry_sample_forecast.csv"
+        "llm_explorer/indexes/samples/telemetry_sample_forecast.csv"
     )
     sample_df = pd.read_csv(uploaded_file)
     st.write("Sample of loaded table:")
@@ -167,12 +161,10 @@ from langchain.llms.openai import OpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.sql_database import SQLDatabase
 from langchain.tools import BaseTool
-from langchain.tools.sql_database.tool import (
-    InfoSQLDatabaseTool,
-    ListSQLDatabaseTool,
-    QueryCheckerTool,
-    QuerySQLDataBaseTool,
-)
+from langchain.tools.sql_database.tool import (InfoSQLDatabaseTool,
+                                               ListSQLDatabaseTool,
+                                               QueryCheckerTool,
+                                               QuerySQLDataBaseTool)
 from pydantic import Field
 from sqlalchemy import *
 from sqlalchemy import MetaData, Table, create_engine, select

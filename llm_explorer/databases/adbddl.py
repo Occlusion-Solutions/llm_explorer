@@ -1,5 +1,4 @@
 import pandas as pd
-
 # import snowflake.connector
 import streamlit as st
 from databricks import sql as adb_sql
@@ -16,7 +15,7 @@ class ADBDDL:
     @staticmethod
     def load_ddls():
         ddl_files = {
-            "telemetry": "explorer/sql/ddl_tse_telemetry.sql",
+            "telemetry": "llm_explorer/sql/ddl_tse_telemetry.sql",
         }
 
         ddl_dict = {}

@@ -27,7 +27,7 @@ from dotenv import find_dotenv, load_dotenv
 from .chains import TSEConversationChain
 from .chat import chat_loop
 from .interfaces import frontend as it
-from .ui.lang import en, es, ru
+from .ui.lang import en, es
 
 
 def auth():
@@ -35,7 +35,7 @@ def auth():
     import yaml
     from yaml.loader import SafeLoader
 
-    with open("explorer/auth/access.yaml") as file:
+    with open("llm_explorer/auth/access.yaml") as file:
         config = yaml.load(file, Loader=SafeLoader)
 
     authenticator = stauth.Authenticate(
@@ -77,7 +77,7 @@ tse_chain = TSEConversationChain()
 
 # --- PATH SETTINGS ---
 current_dir: Path = Path(__file__).parent if "__file__" in locals() else Path.cwd()
-css_file: Path = "explorer/ui/styles/.css"
+css_file: Path = "llm_explorer/ui/styles/.css"
 assets_dir: Path = current_dir / "assets"
 icons_dir: Path = assets_dir / "icons"
 img_dir: Path = assets_dir / "img"

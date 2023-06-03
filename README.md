@@ -4,7 +4,13 @@
 ![llm_explorer_sample.png](/docs/.attachments/llm_explorer_sample.png)
 
 ## Setup
+### Pypi
+```shell
+pip install llm-explorer
+```
 
+
+### Build from source
 Create a virtual environment
 
 ```shell

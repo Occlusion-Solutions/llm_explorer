@@ -2,9 +2,9 @@
 import streamlit as st
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 
-from explorer.databases.adbddl import ADBDDL
-from explorer.indexes.vectorstore import faiss_metadata_index_loader
-from explorer.ui import UI
+from llm_explorer.databases.adbddl import ADBDDL
+from llm_explorer.indexes.vectorstore import faiss_metadata_index_loader
+from llm_explorer.ui import UI
 
 adb_ddl = ADBDDL()
 
@@ -67,5 +67,5 @@ def display_sidebar() -> None:
     elif choice == "Update Vector Store":
         faiss_metadata_index_loader()
         st.write("Run Update Vector Store")
-    elif choice == "explorer/pages/pandas_agent":
+    elif choice == "llm_explorer/pages/pandas_agent":
         st.write("Run pages/pandas_agent")

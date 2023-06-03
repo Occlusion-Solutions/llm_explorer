@@ -1,7 +1,7 @@
 import streamlit as st
 
-import explorer.interfaces.frontend as it
-from explorer.agents import pandas_agent
+import llm_explorer.interfaces.frontend as it
+from llm_explorer.agents import pandas_agent
 
 st.text("LLM Explorer.")
 st.warning(
