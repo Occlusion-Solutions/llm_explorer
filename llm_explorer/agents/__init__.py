@@ -4,9 +4,15 @@ import pandas as pd
 import streamlit as st
 from dotenv import find_dotenv, load_dotenv
 from langchain import ConversationChain, LLMChain, OpenAI
-from langchain.agents import (AgentExecutor, AgentType, Tool, ZeroShotAgent,
-                              create_pandas_dataframe_agent, initialize_agent,
-                              load_tools)
+from langchain.agents import (
+    AgentExecutor,
+    AgentType,
+    Tool,
+    ZeroShotAgent,
+    create_pandas_dataframe_agent,
+    initialize_agent,
+    load_tools,
+)
 from langchain.agents.load_tools import get_all_tool_names
 
 import llm_explorer.interfaces.frontend as it
@@ -161,10 +167,12 @@ from langchain.llms.openai import OpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.sql_database import SQLDatabase
 from langchain.tools import BaseTool
-from langchain.tools.sql_database.tool import (InfoSQLDatabaseTool,
-                                               ListSQLDatabaseTool,
-                                               QueryCheckerTool,
-                                               QuerySQLDataBaseTool)
+from langchain.tools.sql_database.tool import (
+    InfoSQLDatabaseTool,
+    ListSQLDatabaseTool,
+    QueryCheckerTool,
+    QuerySQLDataBaseTool,
+)
 from pydantic import Field
 from sqlalchemy import *
 from sqlalchemy import MetaData, Table, create_engine, select
