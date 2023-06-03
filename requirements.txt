@@ -4,6 +4,21 @@ chromadb
 pyautogui
 databricks-sql-connector
 watchdog
+psycopg2-binary
+py4j
+pyspark
+build
+setuptools
+twine
+paramiko
+pydeequ
+databricks-feature-store
+Flask
+Werkzeug
+pytest
+responses
+azure-storage-blob
+chromadb
 #snowflake-snowpark-python
 #snowflake-connector-python
 jupyter
@@ -148,7 +163,7 @@ sentencepiece
 opencv-python
 sqlalchemy-databricks
 transformers
---extra-index-url https://github.com/huggingface/transformers@v4.29.0
-huggingface_hub==0.14.1
+#--extra-index-url https://github.com/huggingface/transformers@v4.29.0
+huggingface_hub
 streamlit-authenticator
 tabulate
