@@ -36,15 +36,6 @@ jobs:
               sed -i "s/{{ git_branch }}/$GITHUB_REF_NAME/g" "$file"
             done
           ' sh {} +
-
-          # Commit the changes
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          git add .
-          git commit -m "Update file content"
-
-          # Push the changes back to the branch
-          git push
         fi
     - name: Auto Lint with black, pylint
       run: |
@@ -56,3 +47,13 @@ jobs:
       with:
         release-type: python
         package-name: release-please-action
+    - name: Push versioning
+      run: |
+        # Commit the changes
+        git config --local user.email "actions@github.com"
+        git config --local user.name "GitHub Actions"
+        git add .
+        git commit -m "chore(versioning): update versioning"
+
+        # Push the changes back to the branch
+        git push
