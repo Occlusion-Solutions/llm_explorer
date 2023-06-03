@@ -2,13 +2,14 @@ import streamlit as st
 from streamlit import components
 
 
-class UI():
+class UI:
     def __init__():
         ...
 
     def chat_md():
-        st.markdown('<div id="input-container-placeholder"></div>',
-                    unsafe_allow_html=True)
+        st.markdown(
+            '<div id="input-container-placeholder"></div>', unsafe_allow_html=True
+        )
         components.v1.html(
             """
             <script>
@@ -24,23 +25,23 @@ class UI():
             height=0,
         )
 
-
     def message_func(text, is_user=False):
-        '''
+        """
         This function is used to display the messages in the chatbot UI.
-        
+
         Parameters:
         text (str): The text to be displayed.
         is_user (bool): Whether the message is from the user or the chatbot.
         key (str): The key to be used for the message.
         avatar_style (str): The style of the avatar to be used.
-        '''
+        """
         if is_user:
             avatar_url = "https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortFlat&hairColor=Black&facialHairType=BeardLight&facialHairColor=Black&clotheType=Hoodie&clotheColor=DarkBlue&eyeType=Squint&eyebrowType=DefaultNatural&mouthType=Smile&skinColor=Light"
             message_alignment = "flex-end"
             message_bg_color = "linear-gradient(135deg, #00B2FF 0%, #006AFF 100%)"
             avatar_class = "user-avatar"
-            st.write(f"""
+            st.write(
+                f"""
                     <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: {message_alignment};">
                         <div style="background: {message_bg_color}; color: white; border-radius: 20px; padding: 10px; margin-right: 5px; max-width: 75%;">
                             {text}
@@ -48,20 +49,25 @@ class UI():
                                 <img src="{avatar_url}" class="{avatar_class}" alt="avatar" />
 
                     </div>
-                    """, unsafe_allow_html=True)  
+                    """,
+                unsafe_allow_html=True,
+            )
         else:
             avatar_url = "https://avataaars.io/?avatarStyle=Transparent&topType=Hat&accessoriesType=Prescription02&facialHairType=BeardMajestic&facialHairColor=Platinum&clotheType=BlazerShirt&eyeType=Close&eyebrowType=SadConcerned&mouthType=Twinkle&skinColor=Brown"
             message_alignment = "flex-start"
             message_bg_color = "#71797E"
             avatar_class = "bot-avatar"
-            st.write(f"""
+            st.write(
+                f"""
                     <div style="display: flex; align-items: center; margin-bottom: 10px; justify-content: {message_alignment};">
                         <img src="{avatar_url}" class="{avatar_class}" alt="avatar" />
                         <div style="background: {message_bg_color}; color: white; border-radius: 20px; padding: 10px; margin-right: 5px; max-width: 75%;">
                             {text} \n </div>
                     </div>
-                    """, unsafe_allow_html=True)  
-    
+                    """,
+                unsafe_allow_html=True,
+            )
+
     def styles():
         return """
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -131,7 +137,7 @@ Machine Learning and Data Science projects.
 
 
 def about():
-    return '''
+    return """
 # LLM Base
 ***
 This repository includes two initial execution modes. The python notebook is a direct implementation of the LLM agent, while the tse_llm_explorer is a python script to be executed with streamlit (streamit run tse_llm_explorer.py). The streamlit app is a simple interface to interact with the LLM agent.
@@ -223,4 +229,4 @@ You can run the app by running:
 ```bash
 streamlit run explorer.py
 ```
-            '''
+            """

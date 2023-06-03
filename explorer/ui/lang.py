@@ -56,6 +56,7 @@ README_URL: str = f"{REPO_URL}#readme"
 BUG_REPORT_URL: str = f"{REPO_URL}/issues"
 AI_TALKS_URL: str = "https://ai-talks.streamlit.app/"
 
+
 @dataclass
 class Locale:
     ai_role_options: List[str]
@@ -147,7 +148,6 @@ en = Locale(
         See [README.md]({README_URL}) for instructions or use the original [AI Talks]({AI_TALKS_URL}).
     """,
 )
-
 
 
 ru = Locale(

@@ -11,5 +11,7 @@ def session_state_templates():
         """,
         "query_form": "Please type you query here",
         "starting_query": "Which are the top 10 producing wells?",
-        "prior": ["Hi, you are an developer assistant that will use the tools, memory vector stores and chat history to provide the most consistent answer to the user. I will prompt you to help me creating: \n - forecasts \n - job manifests \n - data analysis \n - insights from the lakehouse \n - package usage and functions development \n - and more. Let's think this step by step"],
+        "prior": [
+            "Hi, you are an developer assistant that will use the tools, memory vector stores and chat history to provide the most consistent answer to the user. I will prompt you to help me creating: \n - forecasts \n - job manifests \n - data analysis \n - insights from the lakehouse \n - package usage and functions development \n - and more. Let's think this step by step"
+        ],
     }

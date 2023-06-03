@@ -15,9 +15,9 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="auto",
     menu_items={
-        'Report a bug': "mailto:carlos@occlusion.solutions",
-        'About': about(),
-    }
+        "Report a bug": "mailto:carlos@occlusion.solutions",
+        "About": about(),
+    },
 )
 
 from pathlib import Path
@@ -34,19 +34,19 @@ def auth():
     import streamlit_authenticator as stauth
     import yaml
     from yaml.loader import SafeLoader
-    with open('explorer/auth/access.yaml') as file:
+
+    with open("explorer/auth/access.yaml") as file:
         config = yaml.load(file, Loader=SafeLoader)
 
     authenticator = stauth.Authenticate(
-        config['credentials'],
-        config['cookie']['name'],
-        config['cookie']['key'],
-        config['cookie']['expiry_days'],
-        config['preauthorized']
+        config["credentials"],
+        config["cookie"]["name"],
+        config["cookie"]["key"],
+        config["cookie"]["expiry_days"],
+        config["preauthorized"],
     )
 
-    name, authentication_status, username = authenticator.login('Login', 'main')
-
+    name, authentication_status, username = authenticator.login("Login", "main")
 
     # if st.session_state["authentication_status"]:
     #     authenticator.logout('Logout', 'main')
@@ -57,20 +57,19 @@ def auth():
     # elif st.session_state["authentication_status"] == None:
     #     st.warning('Please enter your username and password')
 
-
     if authentication_status:
-        authenticator.logout('Logout', 'main')
-        if username in config['preauthorized']['users']:
+        authenticator.logout("Logout", "main")
+        if username in config["preauthorized"]["users"]:
             st.write(f"Welcome *{username}*")
             return True
         else:
-            st.error('Username/password is incorrect')
+            st.error("Username/password is incorrect")
             return False
     elif authentication_status == False:
-        st.error('Username/password is incorrect')
+        st.error("Username/password is incorrect")
         return False
     elif authentication_status is None:
-        st.warning('Please enter your username and password')
+        st.warning("Please enter your username and password")
 
 
 load_dotenv(find_dotenv())
@@ -119,13 +118,15 @@ with open(css_file) as f:
 # if "total_tokens" not in st.session_state:
 #     st.session_state.total_tokens = []
 
+
 def main() -> None:
     it.display_header()
     it.display_sidebar()
     if auth():
         chat_loop(tse_chain)
     else:
-        st.write('You are not authorized to access this page.')
+        st.write("You are not authorized to access this page.")
+
 
 if __name__ == "__main__":
     main()

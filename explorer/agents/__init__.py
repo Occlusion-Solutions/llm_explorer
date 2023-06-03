@@ -1,13 +1,18 @@
-
 import contextlib
 
 import pandas as pd
 import streamlit as st
 from dotenv import find_dotenv, load_dotenv
 from langchain import ConversationChain, LLMChain, OpenAI
-from langchain.agents import (AgentExecutor, AgentType, Tool, ZeroShotAgent,
-                              create_pandas_dataframe_agent, initialize_agent,
-                              load_tools)
+from langchain.agents import (
+    AgentExecutor,
+    AgentType,
+    Tool,
+    ZeroShotAgent,
+    create_pandas_dataframe_agent,
+    initialize_agent,
+    load_tools,
+)
 from langchain.agents.load_tools import get_all_tool_names
 
 import explorer.interfaces.frontend as it
@@ -16,38 +21,47 @@ from explorer.templates.prompt import prompt_templates
 
 load_dotenv(find_dotenv())
 
+
 class TSELLMAgent:
-    def __init__(self, agent_id: str = 'smart_gpt'):
+    def __init__(self, agent_id: str = "smart_gpt"):
         self.agent_templates = agents_templates()
         self.agent_id = agent_id
 
     def execute(self, query, df):
         with contextlib.suppress(Exception):
             # Try to get the ts_id from the dataframe
-            ts_id = df['ts_id'].unique()[0]
-            df.drop(columns=['ts_id'], inplace=True)
+            ts_id = df["ts_id"].unique()[0]
+            df.drop(columns=["ts_id"], inplace=True)
             cols = df.columns.tolist()
-            return self.run_pandas_agent(query.format({'ts_id':ts_id,'cols':cols}), df.tail(10))
+            return self.run_pandas_agent(
+                query.format({"ts_id": ts_id, "cols": cols}), df.tail(10)
+            )
         return self.run_pandas_agent(query, df.tail(10))
 
-    def run_pandas_agent(self, query: str, df,) -> str:
+    def run_pandas_agent(
+        self,
+        query: str,
+        df,
+    ) -> str:
         llm = OpenAI()
         get_all_tool_names()
-        tools = load_tools(["llm-math","open-meteo-api","requests_all","terminal","python_repl"], llm=llm)
+        tools = load_tools(
+            ["llm-math", "open-meteo-api", "requests_all", "terminal", "python_repl"],
+            llm=llm,
+        )
 
         agent = create_pandas_dataframe_agent(
-            llm=llm, 
-            df=df, 
-            tools = tools, 
-            #verbose=True,         
-            max_iterations=15, 
-            early_stopping_method="force"
+            llm=llm,
+            df=df,
+            tools=tools,
+            # verbose=True,
+            max_iterations=15,
+            early_stopping_method="force",
         )
         return agent.run(self.agent_templates[self.agent_id].format(prompt=query))
-    
-    
+
     def run_agent_query(self, uploaded_file, query):
-        st.write('Executing LLM Agent...')
+        st.write("Executing LLM Agent...")
         try:
             df = pd.read_csv(uploaded_file)
             st.dataframe(df.style.highlight_max(axis=0))
@@ -55,15 +69,17 @@ class TSELLMAgent:
             print(e)
             df = None
         with st.spinner(text="Executing LLM Agent..."):
-            agent_results = self.execute(query = query, df = df)
+            agent_results = self.execute(query=query, df=df)
             st.success("Completed inferece!")
             st.markdown(f"**Explanation:** {agent_results}")
 
 
 def pandas_agent():
-    uploaded_file = it.display_widgets("explorer/indexes/samples/telemetry_sample_forecast.csv")
+    uploaded_file = it.display_widgets(
+        "explorer/indexes/samples/telemetry_sample_forecast.csv"
+    )
     sample_df = pd.read_csv(uploaded_file)
-    st.write('Sample of loaded table:')
+    st.write("Sample of loaded table:")
     st.table(sample_df.head(3))
     # Create the Streamlit dropdown
     option = st.selectbox(
@@ -73,15 +89,15 @@ def pandas_agent():
     query = ""
     if not (query):
         st.error("Edit Inserted Prompt")
-    query = st.text_area(label=f'{option}:', value=prompt_templates()[option], height=200,)
+    query = st.text_area(
+        label=f"{option}:",
+        value=prompt_templates()[option],
+        height=200,
+    )
 
     agent = TSELLMAgent()
-    if st.button('Run'):
+    if st.button("Run"):
         agent.run_agent_query(uploaded_file=uploaded_file, query=query)
-
-
-
-
 
 
 from typing import Type
@@ -94,21 +110,30 @@ from transformers import HfAgent, OpenAiAgent
 # def play_audio(audio):
 #     sf.write("speech_converted.wav", audio.numpy(), samplerate=16000)
 
+
 class TransformerAgents:
     @staticmethod
-    def load_starcoder_agent(api_path: str = "https://api-inference.huggingface.co/models/bigcode/starcoder"):
+    def load_starcoder_agent(
+        api_path: str = "https://api-inference.huggingface.co/models/bigcode/starcoder",
+    ):
         return HfAgent(api_path)
 
     @staticmethod
-    def load_openassistant_agent(api_path: str = "https://api-inference.huggingface.co/models/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5"):
+    def load_openassistant_agent(
+        api_path: str = "https://api-inference.huggingface.co/models/OpenAssistant/oasst-sft-4-pythia-12b-epoch-3.5",
+    ):
         return HfAgent(api_path)
 
     @staticmethod
-    def load_openai_agent(model: str = "gpt-3.5-turbo", api_key: str = "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"):
+    def load_openai_agent(
+        model: str = "gpt-3.5-turbo",
+        api_key: str = "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",
+    ):
         return OpenAiAgent(model=model, api_key=api_key)
 
+
 class HFTAgent:
-    def __init__(self, agent_name: str = 'openai', **kwargs):
+    def __init__(self, agent_name: str = "openai", **kwargs):
         def get_agent_strategy(agent_name):
             agent_strategies = {
                 "openai": TransformerAgents.load_openai_agent,
@@ -116,19 +141,18 @@ class HFTAgent:
                 "openassistant": TransformerAgents.load_openassistant_agent,
             }
             return agent_strategies[agent_name]()
+
         self.kwargs = kwargs
         self.agent = get_agent_strategy(agent_name)
 
     def run(self, query):
         return self.agent.run(query, **self.kwargs)
-    
+
     def chat(self, query):
         return self.agent.chat(query, **self.kwargs)
-    
+
     def clean_chat(self):
         self.agent.prepare_for_new_chat()
-
-
 
 
 from typing import List
@@ -143,18 +167,21 @@ from langchain.llms.openai import OpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.sql_database import SQLDatabase
 from langchain.tools import BaseTool
-from langchain.tools.sql_database.tool import (InfoSQLDatabaseTool,
-                                               ListSQLDatabaseTool,
-                                               QueryCheckerTool,
-                                               QuerySQLDataBaseTool)
+from langchain.tools.sql_database.tool import (
+    InfoSQLDatabaseTool,
+    ListSQLDatabaseTool,
+    QueryCheckerTool,
+    QuerySQLDataBaseTool,
+)
 from pydantic import Field
 from sqlalchemy import *
 from sqlalchemy import MetaData, Table, create_engine, select
 from sqlalchemy.engine import create_engine
 from sqlalchemy.schema import *
 
-#from pip._internal import main as pipmain
-#pipmain(['install', 'sqlalchemy-databricks'])
+# from pip._internal import main as pipmain
+# pipmain(['install', 'sqlalchemy-databricks'])
+
 
 class LLMExplorerToolkit(BaseToolkit):
     """
@@ -178,6 +205,7 @@ class LLMExplorerToolkit(BaseToolkit):
         """
         Configuration for this Pydantic object.
         """
+
         arbitrary_types_allowed = True
 
     def get_tools(self) -> List[BaseTool]:
@@ -196,7 +224,11 @@ class LLMExplorerToolkit(BaseToolkit):
         Define the LLM Explorer tools to be used in the toolkit.
         """
         get_all_tool_names()
-        return load_tools(["llm-math","open-meteo-api","requests_all","terminal","python_repl"], llm=self.llm)
+        return load_tools(
+            ["llm-math", "open-meteo-api", "requests_all", "terminal", "python_repl"],
+            llm=self.llm,
+        )
+
 
 class ExplorerAgent:
     """
@@ -255,7 +287,7 @@ class ExplorerAgent:
         self._http_path = st.secrets.connections.databricks.http_path
         self._access_token = st.secrets.connections.databricks.access_token
         self._port = 443
-        self._database = kwargs.get("database", 'default')
+        self._database = kwargs.get("database", "default")
 
         # Create the database engine and OpenAI language model
         self._engine = create_engine(
@@ -266,7 +298,9 @@ class ExplorerAgent:
         )
         self._llm = OpenAI(temperature=0, verbose=True)
         self._database_connection = SQLDatabase(engine=self._engine)
-        self._toolkit = LLMExplorerToolkit(db=self._database_connection, llm=self._llm, verbose=True)
+        self._toolkit = LLMExplorerToolkit(
+            db=self._database_connection, llm=self._llm, verbose=True
+        )
         self.memory = ConversationBufferMemory(memory_key="chat_history")
 
         self.SQL_PREFIX = """You are an agent designed to leverage the provided tools and datasets to answer at the best of your ability, question related to SQL databases focused on pyspark sql, but can handle any dialect.
@@ -294,7 +328,6 @@ class ExplorerAgent:
         Thought: I should look at the tables in the database to see what I can query.
         {agent_scratchpad}"""
 
-
         self.FORMAT_INSTRUCTIONS = """Use the following format:
 
         Question: the input question you must answer
@@ -308,22 +341,20 @@ class ExplorerAgent:
         SUFFIX = """Begin!
 
         Question: {input}
-        Thought:{agent_scratchpad}"""   
-
-
+        Thought:{agent_scratchpad}"""
 
         self.agent_executor = create_sql_agent(
             llm=self._llm,
             toolkit=self._toolkit,
             verbose=True,
-            prefix= self.SQL_PREFIX,
-            suffix= self.SQL_SUFFIX,
-            format_instructions= self.FORMAT_INSTRUCTIONS,
-            top_k = 10,
-            max_iterations= 15,
-            max_execution_time = None,
-            early_stopping_method = "force",
+            prefix=self.SQL_PREFIX,
+            suffix=self.SQL_SUFFIX,
+            format_instructions=self.FORMAT_INSTRUCTIONS,
+            top_k=10,
+            max_iterations=15,
+            max_execution_time=None,
+            early_stopping_method="force",
         )
-    
+
     def run(self, query):
         return self.agent_executor.run(query)

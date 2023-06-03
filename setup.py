@@ -13,25 +13,28 @@ try:
 except ImportError:
     # the user has a downlevel version of setuptools.
     print("Error: llm_explorer requires setuptools v40.1.0 or higher.")
-    print('Please upgrade setuptools with "pip install --upgrade setuptools" ' "and try again")
+    print(
+        'Please upgrade setuptools with "pip install --upgrade setuptools" '
+        "and try again"
+    )
     sys.exit(1)
 
-version = '#{PKG_VAR_SETUP}#'
-package_name = 'llm_explorer'
+version = "#{PKG_VAR_SETUP}#"
+package_name = "llm_explorer"
 
-package_env = re.sub(r'[^a-zA-Z]', '', version)
+package_env = re.sub(r"[^a-zA-Z]", "", version)
 
-if 'PKGVARSETUP' in package_env:
-    version = '0.0.1'
+if "PKGVARSETUP" in package_env:
+    version = "0.0.1"
 
-package_env = re.sub(r'[^a-zA-Z]', '', version)
+package_env = re.sub(r"[^a-zA-Z]", "", version)
 
 # Check if any letters were found
 if len(package_env) > 0:
-    package_name = package_name + f'_{package_env}'
+    package_name = package_name + f"_{package_env}"
 
 
-with open('requirements.txt') as f:
+with open("requirements.txt") as f:
     required = f.read().splitlines()
 
 print(package_name, version)
@@ -58,4 +61,3 @@ setup(
         "": ["*.json"],
     },
 )
-

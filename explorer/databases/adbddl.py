@@ -1,4 +1,5 @@
 import pandas as pd
+
 # import snowflake.connector
 import streamlit as st
 from databricks import sql as adb_sql
@@ -48,7 +49,7 @@ class ADBDDL:
                         return df
                 except Exception as e:
                     print(f"Error in cursor {e}")
-        except Exception as e:  
+        except Exception as e:
             print(f"Error in connection {e}")
 
 

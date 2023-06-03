@@ -19,8 +19,7 @@ import re
 import openai
 import pandas as pd
 import streamlit as st
-from langchain.chains import (ConversationalRetrievalChain, LLMChain,
-                              RetrievalQA)
+from langchain.chains import ConversationalRetrievalChain, LLMChain, RetrievalQA
 from langchain.chains.question_answering import load_qa_chain
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.llms import OpenAI
@@ -49,6 +48,7 @@ def set_chain(llm, **kwargs):
     )
     return question_generator, doc_chain
 
+
 class TSEConversationChain:
     def __init__(self, **kwargs):
         self.kwargs = kwargs
@@ -71,20 +71,16 @@ class TSEConversationChain:
             #     "best_of", 1
             # ),  # Generates best_of completions server-side and returns the "best".
         )
-        self.embeddings = OpenAIEmbeddings(openai_api_key=st.secrets.connections.openai.api_key)
-
+        self.embeddings = OpenAIEmbeddings(
+            openai_api_key=st.secrets.connections.openai.api_key
+        )
 
     def get_qa_retrieval_chain(self, vectorstore):
         return RetrievalQA.from_chain_type(
-             llm=self.llm, 
-             chain_type=self.kwargs.get(
-                "chain_type", "stuff"
-            ),  
-            retriever=vectorstore.as_retriever()
+            llm=self.llm,
+            chain_type=self.kwargs.get("chain_type", "stuff"),
+            retriever=vectorstore.as_retriever(),
         )
-
-
-    
 
     def get_chat(self, vectorstore, memory):
         question_generator, doc_chain = set_chain(self.llm)
@@ -110,10 +106,9 @@ class TSEConversationChain:
         return chain.run(prompt)
 
 
-
 # can be removed with better prompt
 def extract_code(text) -> str:
-    #from langchain.chat_models import ChatOpenAI
+    # from langchain.chat_models import ChatOpenAI
     """
     This function is used to extract the SQL code from the user's input.
 

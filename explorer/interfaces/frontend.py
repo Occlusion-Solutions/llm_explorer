@@ -1,4 +1,4 @@
-#import pyautogui
+# import pyautogui
 from typing import Union
 
 import streamlit as st
@@ -45,26 +45,32 @@ def display_sidebar() -> None:
     st.sidebar.code(adb_ddl.ddl_dict[selected_table], language="sql")
 
     # create a button in the side bar that will move to the next page/radio button choice
-    next = st.sidebar.button('Next on list')
+    next = st.sidebar.button("Next on list")
     ## will use this list and next button to increment page, MUST BE in the SAME order
     # as the list passed to the radio button
-    new_choice = ['Explorer','Update Vector Store',]
-    choice = st.sidebar.radio("Run", ('Explorer','Update Vector Store',))
+    new_choice = [
+        "Explorer",
+        "Update Vector Store",
+    ]
+    choice = st.sidebar.radio(
+        "Run",
+        (
+            "Explorer",
+            "Update Vector Store",
+        ),
+    )
     # Take care of scrolling
     if next:
         ...
-        #pyautogui.press("tab")
-        #pyautogui.press("down")
-    elif choice == 'Explorer':
+        # pyautogui.press("tab")
+        # pyautogui.press("down")
+    elif choice == "Explorer":
         st.write("Explorer")
-    elif choice == 'Update Vector Store':
+    elif choice == "Update Vector Store":
         faiss_metadata_index_loader()
         st.write("Run Update Vector Store")
-    elif choice == 'explorer/pages/pandas_agent':
+    elif choice == "explorer/pages/pandas_agent":
         st.write("Run pages/pandas_agent")
-
-
-    
 
     # option_names = ["a", "b", "c"]
     # output_container = st.empty()
