@@ -4,7 +4,7 @@
 
 
 **Lakehouse Analytics &amp; Advanced ML**
-![llm_explorer_sample.png](/docs/.attachments/llm_explorer_sample.png)
+![llm_explorer_sample](https://github.com/Occlusion-Solutions/occlussion_llm_explorer/assets/11726633/f6a5753d-681c-418f-babb-0a2df74dd4d8)
 
 ## Setup
 **Important** This package requires **Open AI & HuggingFace API key**
