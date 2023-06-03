@@ -9,7 +9,7 @@
 ## Setup
 **Important** This package requires **Open AI & HuggingFace API key**
 
-### Pypi
+### PyPi
 ```shell
 python -m pip install llm-explorer
 ```
@@ -85,40 +85,17 @@ Agent is queried for the top 10 producing wells. It identifies the tables it has
 
 > Entering new AgentExecutor chain...
 
-Observation: microchip_logs, padalloc
+Observation: logs, wells
 Thought: I should look at the schema of the microchip_logs and padalloc tables to see what columns I can use.
 
 Action: schema_sql_db
-Action Input: "microchip_logs, padalloc"
-Observation: 
-CREATE TABLE `microchip_logs` (
-        `file_path` STRING, 
-        `content` STRING
-)
-
-
-CREATE TABLE `padalloc` (
-        `ZONE_CODE` STRING, 
-        `ZONE_NAME` STRING, 
-        `ZONE_HID` DECIMAL, 
-        `WELL_HID` DECIMAL, 
-        `WELL_CODE` STRING, 
-        `PROD_DATE` TIMESTAMP, 
-        `PROD_GAS_VOLUME_MCF` DECIMAL, 
-        `PROD_OIL_VOLUME_BBL` DECIMAL, 
-        `PROD_WATER_VOLUME_BBL` DECIMAL, 
-        `ALLOCATED_FLAG` STRING, 
-        `SALE_GAS_VOLUME_MCF` DECIMAL, 
-        `SALE_OIL_VOLUME_BBL` DECIMAL, 
-        `LGL_VOLUME_MCF` DECIMAL, 
-        `OTHER_USES_GAS_MCF` DECIMAL
-)
-
+Action Input: "wells"
+Observation: DDL
 Thought: I should query the padalloc table to get the top 10 producing wells.
 
 Action: query_sql_db
 Action Input: "SELECT WELL_CODE, SUM(PROD_GAS_VOLUME_MCF) AS total_gas_volume_mcf FROM padalloc GROUP BY WELL_CODE ORDER BY total_gas_volume_mcf DESC LIMIT 10"
-Observation: [('1222344             ', Decimal('8429191.6172')), ('1212560             ', Decimal('8211108.4867')), ('1222345             ', Decimal('8163411.9976')), ('1212503             ', Decimal('6621501.8683')), ('1222335             ', Decimal('4773668.6216')), ('1222340             ', Decimal('4276560.8228')), ('1222338             ', Decimal('4153258.1434')), ('1222367             ', Decimal('4018012.2406')), ('1220189             ', Decimal('3965394.4453')), ('1222352             ', Decimal('3786076.4127'))]
+Observation: results_dataframe
 Thought: I now know the top 10 producing wells.
 
 Final Answer: The top 10 producing wells are 1222344, 1212560, 1222345, 1212503, 1222335, 1222340, 1222338, 1222367, 1220189, and 1222352.
