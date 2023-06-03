@@ -3,7 +3,7 @@ devops_state = main
 working_dir = `pwd`
 datadog_api_key = ""
 
-install: miniconda_create_llm_explorer install_python_dependencies
+install: install_python_dependencies
 
 package_build:
 	python -m build
@@ -60,7 +60,7 @@ setup_miniconda:
 
 miniconda_create_llm_explorer:
 	conda create  --yes -n llm_explorer python=3.10 \
-	&& conda activate llm_explorer
+	&& conda init bash
 
 miniconda_create_adb_connect:
 	conda create --name adb_connect python=3.8 \

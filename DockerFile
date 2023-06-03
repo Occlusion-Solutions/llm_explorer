@@ -1,4 +1,6 @@
-FROM ubuntu:18.04
-COPY . /
-RUN make install
-CMD python -m app.py
+FROM python:3.10-slim-buster
+COPY . /opt/app
+WORKDIR /opt/app
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "-m" , "app.py"]

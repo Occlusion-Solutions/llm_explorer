@@ -66,13 +66,12 @@ jobs:
         black .
         black --diff --check $(git ls-files '*.py')
         pylint --disable=all --enable=unused-import $(git ls-files '*.py')
-    - name: Push Linting and Versioning Changes
+        - name: Set up Git
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+    - name: Commit and push changes
       run: |
-        # Commit the changes
-        git config --local user.email "actions@github.com"
-        git config --local user.name "GitHub Actions"
         git add .
-        git commit -m "chore(versioning): versioning and linting changes"
-
-        # Push the changes back to the branch
-        git push
+        git commit -m "chore(versioning): versioning and linting changes" || echo "No changes to commit"
+        git push || echo "No changes to push"
