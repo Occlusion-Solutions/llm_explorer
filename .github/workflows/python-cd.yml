@@ -11,6 +11,25 @@ name: python-cd
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+      tags:
+        description: 'CD Tags'
+        required: false
+        type: boolean
+      environment:
+        description: 'Environment to run CD'
+        type: environment
+        required: true
 
 permissions:
   contents: read
