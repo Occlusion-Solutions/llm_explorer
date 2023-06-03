@@ -4,6 +4,8 @@
 ![llm_explorer_sample.png](/docs/.attachments/llm_explorer_sample.png)
 
 ## Setup
+**Important** This package requires **Open AI & HuggingFace API key**
+
 ### Pypi
 ```shell
 pip install llm-explorer
