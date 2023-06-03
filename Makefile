@@ -3,6 +3,7 @@ devops_state = main
 working_dir = `pwd`
 datadog_api_key = ""
 
+install: miniconda_create_llm_explorer install_python_dependencies
 
 package_build:
 	python -m build
@@ -11,12 +12,7 @@ package_list:
 	unzip -l dist/*.whl  
 
 set_env:
-	source tse/orchestrator/astro/$(devops_state).env
-
-init:
-	@echo "init" && source ./environments/tse_dev_env/bin/activate \
-	&& pip install -r requirements.txt
-
+	source /astro/$(devops_state).env
 
 setup_docker:
 	sudo apt-get install ca-certificates curl gnupg lsb-release make \
@@ -61,16 +57,10 @@ setup_kind:
 setup_miniconda:
 	curl -Lo ./miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
 	&& chmod +x ./miniconda.sh \
-	&& ./miniconda.sh -b -p ./environments/tse-env \
-	&& source ./environments/tse-env/bin/activate \
-	&& conda install -c conda-forge jupyterlab
 
-miniconda_update:
-	curl -Lo ./miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-	&& chmod +x ./miniconda.sh \
-	&& ./miniconda.sh -u -b -p ./environments/tse-env \
-	&& source ./environments/tse-env/bin/activate \
-	&& conda install -c conda-forge jupyterlab 
+miniconda_create_llm_explorer:
+	conda create  --yes -n llm_explorer python=3.10 \
+	&& conda activate llm_explorer
 
 miniconda_create_adb_connect:
 	conda create --name adb_connect python=3.8 \
@@ -98,12 +88,12 @@ setup_airflow:
 	curl -LfO 'https://airflow.apache.org/docs/apache-airflow/2.3.3/docker-compose.yaml'
 
 airflow_start:
-	cd tse/orchestrator/airflow \
+	cd airflow \
 	&& sudo docker-compose up airflow-init -d \
 	&& sudo docker-compose up -d
 
 airflow_kill:
-	cd tse/orchestrator/airflow \
+	cd /airflow \
 	&& sudo docker compose down --volumes --rmi all   
 
 docker_exec_root:

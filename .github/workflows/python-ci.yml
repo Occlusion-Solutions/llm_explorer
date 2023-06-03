@@ -56,11 +56,11 @@ jobs:
             done
           ' sh {} +
         fi
-    - name: Handle Versioning
-      uses: google-github-actions/release-please-action@v3
-      with:
-        release-type: python
-        package-name: release-please-action
+    # - name: Handle Versioning
+    #   uses: google-github-actions/release-please-action@v3
+    #   with:
+    #     release-type: python
+    #     package-name: release-please-action
     - name: Auto Lint with black, pylint
       run: |
         black .
