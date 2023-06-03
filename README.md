@@ -102,3 +102,9 @@ Final Answer: The top 10 producing wells are 1222344, 1212560, 1222345, 1212503,
 
 > Finished chain.
 ```
+
+## Attribution
+
+This is an adapted implementation from the GitHub repository. See the contibutions list for more details:
+
+https://github.com/kaarthik108/snowChat
