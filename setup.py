@@ -33,7 +33,7 @@ package_env = re.sub(r"[^a-zA-Z]", "", version)
 
 # Check if any letters were found
 if len(package_env) > 0:
-    package_name = package_name + f"_{package_env}"
+    package_name += f"_{package_env}"
 
 
 with open("requirements.txt") as f:
@@ -48,18 +48,32 @@ setup(
     description="A Lakehouse LLM Explorer. Wrapper for spark, databricks and langchain processes",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
+    packages=find_packages(where="."),
+    include_package_data=True,
+    setup_requires=['setuptools', 'wheel'],
+    tests_require=['pytest'],
+    python_requires='>=3.10',
+    nstall_requires=required,
+    test_suite="tests",
+    zip_safe=False,
     url="https://github.com/Occlusion-Solutions/occlussion_llm_explorer.git",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3.10",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    package_dir={"": "."},
-    packages=find_packages(where="."),
-    python_requires=">=3.6",
     include_package_data=True,
     install_requires=required,
     package_data={
         "": ["*.json"],
+    },
+    entry_points={
+        'console_scripts': [
+            'llm_explorer=llm_explorer:main',
+        ],
     },
 )
