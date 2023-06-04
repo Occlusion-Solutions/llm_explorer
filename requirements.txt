@@ -167,3 +167,4 @@ transformers
 huggingface_hub
 streamlit-authenticator
 tabulate
+black
