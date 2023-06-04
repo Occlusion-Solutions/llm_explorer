@@ -60,7 +60,7 @@ pip install -r requirements.txt
 Run the python installation
 
 ```shell
-python setup.py install
+pip install .
 llm_explorer
 ```
 

@@ -7,7 +7,7 @@ install: local_build_and_deploy
 
 local_build_and_deploy: 
 	pip uninstall llm_explorer -y \
-	&& python setup.py install \
+	&& pip install . \
 	&& llm_explorer
 
 package_build:
