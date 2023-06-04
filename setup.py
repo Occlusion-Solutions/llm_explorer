@@ -27,7 +27,7 @@ package_name = "llm_explorer"
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
 if "PKGVARSETUP" in package_env:
-    version = "0.0.8"
+    version = "0.0.9"
 
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
@@ -48,7 +48,7 @@ def prepare_data_files(directory, extensions):
 
 
 data_files_structure = [
-    ('llm_explorer', prepare_data_files('llm_explorer', ['csv', 'sql', 'txt', 'md', 'html', 'css', 'json', 'yaml'])),
+    ('llm_explorer', prepare_data_files('llm_explorer', ['csv', 'sql', 'txt', 'md', 'html', 'css', 'json', 'yaml', 'faiss', 'pkl'])),
 ]
 
 print(package_name, version)
@@ -80,7 +80,7 @@ setup(
     ],
     install_requires=required,
     package_data={
-        "llm_explorer": ["*.json", "*.yaml", "*.sql", "*.csv", "*.txt", "*.md", "*.html", "*.css"],
+        "llm_explorer": ["*.json", "*.yaml", "*.sql", "*.csv", "*.txt", "*.md", "*.html", "*.css", "*.pkl", "*.faiss"],
     },
     data_files=data_files_structure,
     py_modules=['main'],

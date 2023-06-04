@@ -57,7 +57,7 @@ Install the requirements
 pip install -r requirements.txt
 ```
 
-Run the main.py script using streamlit:
+Run the python installation
 
 ```shell
 python setup.py install
@@ -88,6 +88,20 @@ server_hostname="your databricks host"
 http_path="http path under cluster JDBC/ODBC connectivity"
 access_token="your databricks access token"
 ```
+
+## Run Modes
+
+### Chain
+
+An assistant Query engine, that is asked naturally with table references and helps in the query generation. The execution of the queries is manual
+
+### Agent
+
+It uses the pandas agent to generate the queries and execute them. It is a more natural way of querying the data and it operates autonomously until it thinks it finds and answer.
+
+### Chat
+
+It uses the HuggingFace Transformers Agent chat to operate in a conversational way.
 
 ## Lakehouse Agent Sample
 

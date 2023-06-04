@@ -3,7 +3,7 @@ devops_state = main
 working_dir = `pwd`
 datadog_api_key = ""
 
-install: install_python_dependencies local_build_and_deploy
+install: local_build_and_deploy
 
 local_build_and_deploy: 
 	pip uninstall llm_explorer -y \

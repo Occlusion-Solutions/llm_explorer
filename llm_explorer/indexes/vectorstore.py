@@ -32,12 +32,12 @@ class VectorStoreHandler:
 
 @st.cache_resource
 def load_chroma_vectorstore():
-    return Chroma(persist_directory="croma_index", embedding_function=embeddings)
+    return Chroma(persist_directory="llm_explorer/indexes/croma_index", embedding_function=embeddings)
 
 
 @st.cache_resource
 def load_faiss_vectorstore():
-    return FAISS.load_local("indexes/faiss_index", embeddings)
+    return FAISS.load_local("llm_explorer/indexes/faiss_index", embeddings)
 
 
 def faiss_metadata_index_loader(
