@@ -184,3 +184,37 @@ es = Locale(
         Consulta el [README.md]({README_URL}) para obtener instrucciones o utiliza el [LLM Explorer original]({LLM_EXPLORER_URL}).
     """,
 )
+
+
+
+
+
+# selected_lang = option_menu(
+#     menu_title=None,
+#     options=[LANG_EN, LANG_RU, LANG_ES],
+#     icons=["globe2", "translate"],
+#     menu_icon="cast",
+#     default_index=0,
+#     orientation="horizontal",
+#     styles=HEADER_STYLES
+# )
+
+# # Storing The Context
+# if "locale" not in st.session_state:
+#     st.session_state.locale = en
+# if "generated" not in st.session_state:
+#     st.session_state.generated = []
+# if "past" not in st.session_state:
+#     st.session_state.past = []
+# if "messages" not in st.session_state:
+#     st.session_state.messages = []
+# if "user_text" not in st.session_state:
+#     st.session_state.user_text = ""
+# if "input_kind" not in st.session_state:
+#     st.session_state.input_kind = st.session_state.locale.input_kind_1
+# if "seed" not in st.session_state:
+#     st.session_state.seed = 420# noqa: S311
+# if "costs" not in st.session_state:
+#     st.session_state.costs = []
+# if "total_tokens" not in st.session_state:
+#     st.session_state.total_tokens = []
