@@ -17,7 +17,7 @@ python -m pip install llm-explorer
 ```
 
 ```shell
-python -m llm_explorer
+llm_explorer
 ```
 
 Initial load could take some time as it downloads the model and the tokenizer. Remember to include the secrets.toml file under .streamlit/ folder.
@@ -39,7 +39,7 @@ cd llm_explorer && make install
 Run the package
 
 ```shell
-python -m llm_explorer
+llm_explorer
 ```
 
 ### Build manaually
