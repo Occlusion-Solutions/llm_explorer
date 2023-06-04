@@ -27,7 +27,7 @@ package_name = "llm_explorer"
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
 if "PKGVARSETUP" in package_env:
-    version = "0.0.6"
+    version = "0.0.7"
 
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
@@ -68,11 +68,12 @@ setup(
     ],
     install_requires=required,
     package_data={
-        "": ["*.json"],
+        "": ["*.json", "*.yaml", ".sql", ".csv", ".txt", ".md", ".html", ".css"],
     },
+    py_modules=['main'],
     entry_points={
         "console_scripts": [
-            "llm_explorer=app:main",
+            "llm_explorer=main:main",
         ],
     },
 )

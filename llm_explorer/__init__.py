@@ -7,7 +7,7 @@ LANG_ES: str = "Es"
 
 import streamlit as st
 
-from .ui import about
+from llm_explorer.ui import about
 
 st.set_page_config(
     page_title=PAGE_TITLE,
@@ -24,10 +24,10 @@ from pathlib import Path
 
 from dotenv import find_dotenv, load_dotenv
 
-from .chains import ExplorerConversationChain
-from .chat import chat_loop
-from .interfaces import frontend as it
-from .ui.lang import en, es
+from llm_explorer.chains import ExplorerConversationChain
+from llm_explorer.chat import chat_loop
+from llm_explorer.interfaces import frontend as it
+from llm_explorer.ui.lang import en, es
 
 
 def auth():

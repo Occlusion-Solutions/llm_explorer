@@ -1,4 +1,4 @@
-from llm_explorer import main
+from llm_explorer.app import main
 
 if __name__ == "__main__":
     main()

@@ -5,6 +5,11 @@ datadog_api_key = ""
 
 install: install_python_dependencies
 
+local_build_and_deploy: 
+	pip uninstall llm_explorer -y \
+	&& python setup.py install \
+	&& llm_explorer
+
 package_build:
 	python -m build
 
