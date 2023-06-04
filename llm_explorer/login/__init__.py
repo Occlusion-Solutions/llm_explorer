@@ -44,9 +44,9 @@ def get_login_session_state(config) -> str:
     elif authentication_status is None:
         st.warning("Please enter your username and password")
 
-    return authentication_status, username
+    return authentication_status
 
 def auth():
     config = get_auth_file()
-    authentication_status, username = get_login_session_state(config)
-    return (config, authentication_status, username)
+    authentication_status = get_login_session_state(config)
+    return authentication_status

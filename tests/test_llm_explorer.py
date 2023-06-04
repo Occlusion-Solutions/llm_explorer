@@ -1,5 +1,5 @@
 import pytest
-from llm_explorer import  auth, main
+from llm_explorer import main
 
 
 
