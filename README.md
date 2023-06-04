@@ -42,9 +42,9 @@ Run the package
 llm_explorer
 ```
 
-### Build manaually
+### Build manually
 
-After cloning, ceate a virtual environment
+After cloning, create a virtual environment
 
 ```shell
 conda create -n llm_explorer python=3.10
