@@ -1,6 +1,6 @@
 import re
 import sys
-
+import glob
 from setuptools import find_packages, setup
 
 if sys.version_info < (3, 6):
@@ -27,7 +27,7 @@ package_name = "llm_explorer"
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
 if "PKGVARSETUP" in package_env:
-    version = "0.0.7"
+    version = "0.0.8"
 
 package_env = re.sub(r"[^a-zA-Z]", "", version)
 
@@ -39,6 +39,18 @@ if len(package_env) > 0:
 with open("requirements.txt") as f:
     required = f.read().splitlines()
 
+
+def prepare_data_files(directory, extensions):
+    files = []
+    for ext in extensions:
+        files.extend(glob.glob(f'{directory}/*.{ext}'))
+    return files
+
+
+data_files_structure = [
+    ('llm_explorer', prepare_data_files('llm_explorer', ['csv', 'sql', 'txt', 'md', 'html', 'css', 'json', 'yaml'])),
+]
+
 print(package_name, version)
 setup(
     name=package_name,
@@ -48,7 +60,7 @@ setup(
     description="A Lakehouse LLM Explorer. Wrapper for spark, databricks and langchain processes",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
-    packages=find_packages(where="."),
+    packages=find_packages(),
     include_package_data=True,
     setup_requires=["setuptools", "wheel"],
     tests_require=["pytest"],
@@ -56,7 +68,7 @@ setup(
     nstall_requires=required,
     test_suite="tests",
     zip_safe=False,
-    url="https://github.com/Occlusion-Solutions/occlussion_llm_explorer.git",
+    url="https://github.com/Occlusion-Solutions/llm_explorer.git",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -68,8 +80,9 @@ setup(
     ],
     install_requires=required,
     package_data={
-        "": ["*.json", "*.yaml", ".sql", ".csv", ".txt", ".md", ".html", ".css"],
+        "llm_explorer": ["*.json", "*.yaml", "*.sql", "*.csv", "*.txt", "*.md", "*.html", "*.css"],
     },
+    data_files=data_files_structure,
     py_modules=['main'],
     entry_points={
         "console_scripts": [

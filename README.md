@@ -2,42 +2,53 @@
 
 [![CodeQL](https://github.com/Occlusion-Solutions/occlussion_llm_explorer/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Occlusion-Solutions/occlussion_llm_explorer/actions/workflows/github-code-scanning/codeql) [![python-ci](https://github.com/Occlusion-Solutions/occlussion_llm_explorer/actions/workflows/python-ci.yml/badge.svg)](https://github.com/Occlusion-Solutions/occlussion_llm_explorer/actions/workflows/python-ci.yml) [![python-cd](https://github.com/Occlusion-Solutions/occlussion_llm_explorer/actions/workflows/python-cd.yml/badge.svg)](https://github.com/Occlusion-Solutions/occlussion_llm_explorer/actions/workflows/python-cd.yml) [![PyPI version](https://badge.fury.io/py/llm-explorer.svg)](https://badge.fury.io/py/llm-explorer)
 
-
 **Lakehouse Analytics &amp; Advanced ML**
 ![llm_explorer_sample](https://github.com/Occlusion-Solutions/occlussion_llm_explorer/assets/11726633/f6a5753d-681c-418f-babb-0a2df74dd4d8)
 
 ## Setup
-**Important** This package requires **Open AI & HuggingFace API key**
 
-### PyPi
+**Important** This package requires **Open AI & HuggingFace API key**. Remember to run from a folder with the `.streamlit/secrets.toml` file.
+See [here](https://beta.openai.com/docs/developer-quickstart/your-api-keys) and [here](https://huggingface.co/docs/hub/quicktour.html#authentication) for more details.
+
+### Quick Install
+
 ```shell
 python -m pip install llm-explorer
 ```
 
 ```shell
-touch main.py
-```
-
-```python
-from llm_explorer import main
-
-if __name__ == "__main__":
-    main()
-```
-
-```shell
-python -m streamlit run main.py
+python -m llm_explorer
 ```
 
 Initial load could take some time as it downloads the model and the tokenizer. Remember to include the secrets.toml file under .streamlit/ folder.
 
-
 ### Build from source
-Create a virtual environment
+
+Clone the repository
 
 ```shell
-conda create -n occlusion python=3.10
-conda activate occlusion
+git clone https://github.com/Occlusion-Solutions/llm_explorer.git
+```
+
+Install the package
+
+``` shell
+cd llm_explorer && make install
+```
+
+Run the package
+
+```shell
+python -m llm_explorer
+```
+
+### Build manaually
+
+After cloning, ceate a virtual environment
+
+```shell
+conda create -n llm_explorer python=3.10
+conda activate llm_explorer
 ```
 
 Install the requirements
@@ -49,7 +60,8 @@ pip install -r requirements.txt
 Run the main.py script using streamlit:
 
 ```shell
-python -m streamlit run main.py
+python setup.py install
+llm_explorer
 ```
 
 ## Usage
