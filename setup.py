@@ -43,12 +43,18 @@ with open("requirements.txt") as f:
 def prepare_data_files(directory, extensions):
     files = []
     for ext in extensions:
-        files.extend(glob.glob(f'{directory}/*.{ext}'))
+        files.extend(glob.glob(f"{directory}/*.{ext}"))
     return files
 
 
 data_files_structure = [
-    ('llm_explorer', prepare_data_files('llm_explorer', ['csv', 'sql', 'txt', 'md', 'html', 'css', 'json', 'yaml', 'faiss', 'pkl'])),
+    (
+        "llm_explorer",
+        prepare_data_files(
+            "llm_explorer",
+            ["csv", "sql", "txt", "md", "html", "css", "json", "yaml", "faiss", "pkl"],
+        ),
+    ),
 ]
 
 print(package_name, version)
@@ -80,10 +86,21 @@ setup(
     ],
     install_requires=required,
     package_data={
-        "llm_explorer": ["*.json", "*.yaml", "*.sql", "*.csv", "*.txt", "*.md", "*.html", "*.css", "*.pkl", "*.faiss"],
+        "llm_explorer": [
+            "*.json",
+            "*.yaml",
+            "*.sql",
+            "*.csv",
+            "*.txt",
+            "*.md",
+            "*.html",
+            "*.css",
+            "*.pkl",
+            "*.faiss",
+        ],
     },
     data_files=data_files_structure,
-    py_modules=['main'],
+    py_modules=["main"],
     entry_points={
         "console_scripts": [
             "llm_explorer=main:main",

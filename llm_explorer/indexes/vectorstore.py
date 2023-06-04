@@ -32,7 +32,10 @@ class VectorStoreHandler:
 
 @st.cache_resource
 def load_chroma_vectorstore():
-    return Chroma(persist_directory="llm_explorer/indexes/croma_index", embedding_function=embeddings)
+    return Chroma(
+        persist_directory="llm_explorer/indexes/croma_index",
+        embedding_function=embeddings,
+    )
 
 
 @st.cache_resource

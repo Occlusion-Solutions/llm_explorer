@@ -10,5 +10,6 @@ filename = os.path.join(dirname, "__init__.py")
 _config.set_option("server.headless", True)
 args = []
 
+
 def main():
     streamlit.web.bootstrap.run(filename, "", args, flag_options={})

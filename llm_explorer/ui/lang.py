@@ -186,9 +186,6 @@ es = Locale(
 )
 
 
-
-
-
 # selected_lang = option_menu(
 #     menu_title=None,
 #     options=[LANG_EN, LANG_RU, LANG_ES],

@@ -20,7 +20,7 @@ def get_login_session_state(config) -> str:
     )
 
     name, authentication_status, username = authenticator.login("Login", "main")
-        
+
     # if st.session_state["authentication_status"]:
     #     authenticator.logout('Logout', 'main')
     #     st.write(f'Welcome *{st.session_state["name"]}*')
@@ -45,6 +45,7 @@ def get_login_session_state(config) -> str:
         st.warning("Please enter your username and password")
 
     return authentication_status
+
 
 def auth():
     config = get_auth_file()

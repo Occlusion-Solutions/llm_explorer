@@ -32,7 +32,6 @@ from llm_explorer.ui.styles import load_css
 from llm_explorer.login import auth
 
 
-
 load_dotenv(find_dotenv())
 chain = ExplorerConversationChain()
 load_css()
@@ -45,6 +44,7 @@ def main() -> None:
         chat_loop(chain)
     else:
         st.write("You are not authorized to access this page.")
+
 
 if __name__ == "__main__":
     main()
